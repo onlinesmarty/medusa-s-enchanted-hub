@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
 
 const stats = [
-  { label: "Active Agents", value: "6", sub: "of 8 total", emoji: "🐍", color: "var(--glow-emerald)" },
-  { label: "Tasks Complete", value: "1,247", sub: "this week", emoji: "✅", color: "var(--glow-gold)" },
-  { label: "Uptime", value: "99.7%", sub: "30-day avg", emoji: "⚡", color: "var(--glow-cyan)" },
-  { label: "Spells Cast", value: "8,421", sub: "API calls today", emoji: "🔮", color: "var(--glow-amethyst)" },
+  { label: "Agentes Activos", value: "6", sub: "de 8 total", emoji: "🐍", color: "var(--glow-emerald)" },
+  { label: "Tareas Completas", value: "1.247", sub: "esta semana", emoji: "✅", color: "var(--glow-gold)" },
+  { label: "Disponibilidad", value: "99,7%", sub: "promedio 30d", emoji: "⚡", color: "var(--glow-cyan)" },
+  { label: "Hechizos Lanzados", value: "8.421", sub: "llamadas API hoy", emoji: "🔮", color: "var(--glow-amethyst)" },
 ];
 
 const StatsBar = () => {

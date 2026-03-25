@@ -11,60 +11,12 @@ interface Agent {
 }
 
 const agents: Agent[] = [
-  {
-    name: "Basilisk",
-    emoji: "🐉",
-    role: "Data Harvester",
-    status: "active",
-    taskCompletion: 78,
-    currentTask: "Scraping market feeds",
-    glowColor: "var(--glow-emerald)",
-  },
-  {
-    name: "Ouroboros",
-    emoji: "🔄",
-    role: "Pipeline Orchestrator",
-    status: "processing",
-    taskCompletion: 45,
-    currentTask: "Rebuilding data pipeline",
-    glowColor: "var(--glow-amethyst)",
-  },
-  {
-    name: "Naga",
-    emoji: "🌊",
-    role: "API Guardian",
-    status: "active",
-    taskCompletion: 92,
-    currentTask: "Monitoring endpoint health",
-    glowColor: "var(--glow-cyan)",
-  },
-  {
-    name: "Jörmungandr",
-    emoji: "🌍",
-    role: "Deployment Serpent",
-    status: "active",
-    taskCompletion: 100,
-    currentTask: "All containers deployed",
-    glowColor: "var(--glow-gold)",
-  },
-  {
-    name: "Hydra",
-    emoji: "🔥",
-    role: "Multi-Task Handler",
-    status: "processing",
-    taskCompletion: 63,
-    currentTask: "Processing 4 parallel jobs",
-    glowColor: "var(--glow-emerald)",
-  },
-  {
-    name: "Quetzalcoatl",
-    emoji: "🌈",
-    role: "Revenue Alchemist",
-    status: "active",
-    taskCompletion: 87,
-    currentTask: "Optimizing conversion funnels",
-    glowColor: "var(--glow-gold)",
-  },
+  { name: "Basilisk", emoji: "🐉", role: "Recolector de Datos", status: "active", taskCompletion: 78, currentTask: "Scrapeando feeds del mercado", glowColor: "var(--glow-emerald)" },
+  { name: "Ouroboros", emoji: "🔄", role: "Orquestador de Pipelines", status: "processing", taskCompletion: 45, currentTask: "Reconstruyendo pipeline de datos", glowColor: "var(--glow-amethyst)" },
+  { name: "Naga", emoji: "🌊", role: "Guardián de APIs", status: "active", taskCompletion: 92, currentTask: "Monitoreando salud de endpoints", glowColor: "var(--glow-cyan)" },
+  { name: "Jörmungandr", emoji: "🌍", role: "Serpiente de Despliegue", status: "active", taskCompletion: 100, currentTask: "Todos los contenedores desplegados", glowColor: "var(--glow-gold)" },
+  { name: "Hydra", emoji: "🔥", role: "Multi-Tarea", status: "processing", taskCompletion: 63, currentTask: "Procesando 4 trabajos en paralelo", glowColor: "var(--glow-emerald)" },
+  { name: "Quetzalcoatl", emoji: "🌈", role: "Alquimista de Ingresos", status: "active", taskCompletion: 87, currentTask: "Optimizando embudos de conversión", glowColor: "var(--glow-gold)" },
 ];
 
 const statusColors: Record<string, string> = {
@@ -74,9 +26,9 @@ const statusColors: Record<string, string> = {
 };
 
 const statusLabels: Record<string, string> = {
-  active: "Active",
-  idle: "Idle",
-  processing: "Processing",
+  active: "Activo",
+  idle: "Inactivo",
+  processing: "Procesando",
 };
 
 const AgentCard = ({ agent, index }: { agent: Agent; index: number }) => {
@@ -88,7 +40,6 @@ const AgentCard = ({ agent, index }: { agent: Agent; index: number }) => {
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
       className="glass-card p-5 relative overflow-hidden group cursor-pointer"
     >
-      {/* Glow on hover */}
       <motion.div
         className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl"
         style={{
@@ -97,7 +48,6 @@ const AgentCard = ({ agent, index }: { agent: Agent; index: number }) => {
       />
 
       <div className="relative z-10">
-        {/* Header */}
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
             <motion.span
@@ -108,9 +58,7 @@ const AgentCard = ({ agent, index }: { agent: Agent; index: number }) => {
               {agent.emoji}
             </motion.span>
             <div>
-              <h3 className="font-display font-semibold text-foreground text-sm tracking-wide">
-                {agent.name}
-              </h3>
+              <h3 className="font-display font-semibold text-foreground text-sm tracking-wide">{agent.name}</h3>
               <p className="text-xs font-mono text-muted-foreground">{agent.role}</p>
             </div>
           </div>
@@ -126,21 +74,14 @@ const AgentCard = ({ agent, index }: { agent: Agent; index: number }) => {
               }
               transition={{ duration: 1.5, repeat: Infinity }}
             />
-            <span className="text-[10px] font-mono text-muted-foreground uppercase">
-              {statusLabels[agent.status]}
-            </span>
+            <span className="text-[10px] font-mono text-muted-foreground uppercase">{statusLabels[agent.status]}</span>
           </div>
         </div>
 
-        {/* Progress */}
         <div className="mb-3">
           <div className="flex justify-between items-center mb-1.5">
-            <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider">
-              Task Progress
-            </span>
-            <span className="text-xs font-mono text-foreground font-semibold">
-              {agent.taskCompletion}%
-            </span>
+            <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider">Progreso</span>
+            <span className="text-xs font-mono text-foreground font-semibold">{agent.taskCompletion}%</span>
           </div>
           <div className="h-1.5 bg-muted rounded-full overflow-hidden">
             <motion.div
@@ -155,10 +96,7 @@ const AgentCard = ({ agent, index }: { agent: Agent; index: number }) => {
           </div>
         </div>
 
-        {/* Current task */}
-        <p className="text-xs text-muted-foreground font-mono truncate">
-          ⚡ {agent.currentTask}
-        </p>
+        <p className="text-xs text-muted-foreground font-mono truncate">⚡ {agent.currentTask}</p>
       </div>
     </motion.div>
   );

@@ -5,6 +5,7 @@ import AgentGrid from "@/components/AgentGrid";
 import RevenueCauldron from "@/components/RevenueCauldron";
 import GoalsPanel from "@/components/GoalsPanel";
 import ActivityFeed from "@/components/ActivityFeed";
+import AnimatedOffice from "@/components/AnimatedOffice";
 import { motion } from "framer-motion";
 
 const Index = () => {
@@ -12,7 +13,6 @@ const Index = () => {
     <div className="min-h-screen bg-background relative">
       <FloatingParticles />
 
-      {/* Subtle grid overlay */}
       <div
         className="fixed inset-0 pointer-events-none z-0 opacity-[0.03]"
         style={{
@@ -26,10 +26,11 @@ const Index = () => {
         <MedusaHeader />
 
         <main className="px-4 md:px-6 pb-10 max-w-[1400px] mx-auto space-y-6">
-          {/* Stats overview */}
           <StatsBar />
 
-          {/* Section title */}
+          {/* Animated Office */}
+          <AnimatedOffice />
+
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -38,22 +39,19 @@ const Index = () => {
           >
             <div className="h-px flex-1 bg-border/50" />
             <h2 className="font-display text-xs text-muted-foreground tracking-[0.3em] uppercase">
-              Agent Fleet
+              Flota de Agentes
             </h2>
             <div className="h-px flex-1 bg-border/50" />
           </motion.div>
 
-          {/* Agent grid */}
           <AgentGrid />
 
-          {/* Bottom panels */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
             <RevenueCauldron />
             <GoalsPanel />
             <ActivityFeed />
           </div>
 
-          {/* Footer */}
           <motion.footer
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -61,7 +59,7 @@ const Index = () => {
             className="text-center py-6"
           >
             <p className="text-[10px] font-mono text-muted-foreground/50 tracking-widest uppercase">
-              🐍 Medusa v1.0 · OpenClaw Mission Control · Powered by LobeHub + ClaudeCode
+              🐍 Medusa v1.0 · OpenClaw Centro de Control · Powered by LobeHub + ClaudeCode
             </p>
           </motion.footer>
         </main>

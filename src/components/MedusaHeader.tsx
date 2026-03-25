@@ -9,7 +9,6 @@ const MedusaHeader = () => {
       className="relative z-10 px-6 py-5 flex items-center justify-between"
     >
       <div className="flex items-center gap-4">
-        {/* Medusa Logo */}
         <motion.div
           className="relative w-12 h-12 rounded-full flex items-center justify-center glow-emerald"
           style={{
@@ -33,12 +32,11 @@ const MedusaHeader = () => {
             MEDUSA
           </h1>
           <p className="text-xs font-mono text-muted-foreground tracking-widest uppercase">
-            OpenClaw Mission Control
+            OpenClaw Centro de Control
           </p>
         </div>
       </div>
 
-      {/* Status indicator */}
       <div className="flex items-center gap-6">
         <div className="hidden md:flex items-center gap-2 glass-card px-4 py-2">
           <motion.div
@@ -46,7 +44,7 @@ const MedusaHeader = () => {
             animate={{ opacity: [1, 0.4, 1] }}
             transition={{ duration: 1.5, repeat: Infinity }}
           />
-          <span className="text-xs font-mono text-foreground/70">All Systems Enchanted</span>
+          <span className="text-xs font-mono text-foreground/70">Sistemas Encantados</span>
         </div>
 
         <div className="hidden lg:flex items-center gap-2 glass-card px-4 py-2">

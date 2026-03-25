@@ -1,17 +1,10 @@
 import { motion } from "framer-motion";
 
-interface Goal {
-  name: string;
-  progress: number;
-  target: string;
-  emoji: string;
-}
-
-const goals: Goal[] = [
-  { name: "Q1 Revenue Target", progress: 87, target: "$100K", emoji: "💰" },
-  { name: "Agent Fleet Expansion", progress: 60, target: "12 agents", emoji: "🐍" },
-  { name: "API Uptime", progress: 99, target: "99.9%", emoji: "⚡" },
-  { name: "Customer Onboarding", progress: 45, target: "500 users", emoji: "🌟" },
+const goals = [
+  { name: "Objetivo Ingresos Q1", progress: 87, target: "$100K", emoji: "💰" },
+  { name: "Expansión de Flota", progress: 60, target: "12 agentes", emoji: "🐍" },
+  { name: "Disponibilidad API", progress: 99, target: "99,9%", emoji: "⚡" },
+  { name: "Onboarding Clientes", progress: 45, target: "500 usuarios", emoji: "🌟" },
 ];
 
 const GoalsPanel = () => {
@@ -23,26 +16,13 @@ const GoalsPanel = () => {
       className="glass-card p-6"
     >
       <div className="flex items-center gap-2 mb-5">
-        <motion.span
-          className="text-xl"
-          animate={{ rotate: [0, 10, -10, 0] }}
-          transition={{ duration: 3, repeat: Infinity }}
-        >
-          🎯
-        </motion.span>
-        <h2 className="font-display text-sm font-semibold text-foreground tracking-wider uppercase">
-          Mission Goals
-        </h2>
+        <motion.span className="text-xl" animate={{ rotate: [0, 10, -10, 0] }} transition={{ duration: 3, repeat: Infinity }}>🎯</motion.span>
+        <h2 className="font-display text-sm font-semibold text-foreground tracking-wider uppercase">Metas de Misión</h2>
       </div>
 
       <div className="space-y-4">
         {goals.map((goal, i) => (
-          <motion.div
-            key={goal.name}
-            initial={{ opacity: 0, x: 10 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.7 + i * 0.1 }}
-          >
+          <motion.div key={goal.name} initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.7 + i * 0.1 }}>
             <div className="flex items-center justify-between mb-1.5">
               <div className="flex items-center gap-2">
                 <span className="text-sm">{goal.emoji}</span>
@@ -51,17 +31,10 @@ const GoalsPanel = () => {
               <span className="text-[10px] font-mono text-muted-foreground">{goal.target}</span>
             </div>
             <div className="h-2 bg-muted rounded-full overflow-hidden">
-              <motion.div
-                className="h-full rounded-full snake-gradient"
-                initial={{ width: 0 }}
-                animate={{ width: `${goal.progress}%` }}
-                transition={{ delay: 0.9 + i * 0.1, duration: 1, ease: "easeOut" }}
-              />
+              <motion.div className="h-full rounded-full snake-gradient" initial={{ width: 0 }} animate={{ width: `${goal.progress}%` }} transition={{ delay: 0.9 + i * 0.1, duration: 1, ease: "easeOut" }} />
             </div>
             <div className="flex justify-end mt-1">
-              <span className="text-[10px] font-mono text-muted-foreground">
-                {goal.progress}%
-              </span>
+              <span className="text-[10px] font-mono text-muted-foreground">{goal.progress}%</span>
             </div>
           </motion.div>
         ))}

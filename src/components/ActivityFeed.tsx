@@ -1,13 +1,13 @@
 import { motion } from "framer-motion";
 
 const activities = [
-  { time: "2m ago", agent: "Basilisk", action: "Completed data harvest cycle #847", emoji: "🐉" },
-  { time: "5m ago", agent: "Naga", action: "Health check passed — all endpoints green", emoji: "🌊" },
-  { time: "12m ago", agent: "Quetzalcoatl", action: "Revenue spike detected: +$340 conversion", emoji: "🌈" },
-  { time: "18m ago", agent: "Hydra", action: "Spawned 2 new parallel workers", emoji: "🔥" },
-  { time: "25m ago", agent: "Jörmungandr", action: "Deployed v2.4.1 to production", emoji: "🌍" },
-  { time: "31m ago", agent: "Ouroboros", action: "Pipeline rebuild at checkpoint 3/7", emoji: "🔄" },
-  { time: "45m ago", agent: "Medusa", action: "Coordinated full fleet sync", emoji: "🐍" },
+  { time: "hace 2m", agent: "Basilisk", action: "Completó ciclo de recolección #847", emoji: "🐉" },
+  { time: "hace 5m", agent: "Naga", action: "Chequeo de salud OK — todos los endpoints verdes", emoji: "🌊" },
+  { time: "hace 12m", agent: "Quetzalcoatl", action: "Pico de ingresos detectado: +$340 conversión", emoji: "🌈" },
+  { time: "hace 18m", agent: "Hydra", action: "Generó 2 nuevos workers paralelos", emoji: "🔥" },
+  { time: "hace 25m", agent: "Jörmungandr", action: "Desplegó v2.4.1 en producción", emoji: "🌍" },
+  { time: "hace 31m", agent: "Ouroboros", action: "Rebuild del pipeline en checkpoint 3/7", emoji: "🔄" },
+  { time: "hace 45m", agent: "Medusa", action: "Coordinó sincronización completa de la flota", emoji: "🐍" },
 ];
 
 const ActivityFeed = () => {
@@ -19,19 +19,11 @@ const ActivityFeed = () => {
       className="glass-card p-6"
     >
       <div className="flex items-center gap-2 mb-5">
-        <motion.span
-          className="text-xl"
-          animate={{ y: [0, -2, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-        >
-          📜
-        </motion.span>
-        <h2 className="font-display text-sm font-semibold text-foreground tracking-wider uppercase">
-          Enchantment Log
-        </h2>
+        <motion.span className="text-xl" animate={{ y: [0, -2, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>📜</motion.span>
+        <h2 className="font-display text-sm font-semibold text-foreground tracking-wider uppercase">Registro de Hechizos</h2>
       </div>
 
-      <div className="space-y-3 max-h-[320px] overflow-y-auto pr-2 scrollbar-thin">
+      <div className="space-y-3 max-h-[320px] overflow-y-auto pr-2">
         {activities.map((item, i) => (
           <motion.div
             key={i}
@@ -43,14 +35,10 @@ const ActivityFeed = () => {
             <span className="text-sm mt-0.5">{item.emoji}</span>
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2">
-                <span className="text-xs font-mono font-semibold text-foreground/90">
-                  {item.agent}
-                </span>
+                <span className="text-xs font-mono font-semibold text-foreground/90">{item.agent}</span>
                 <span className="text-[10px] font-mono text-muted-foreground">{item.time}</span>
               </div>
-              <p className="text-xs text-muted-foreground font-mono mt-0.5 truncate">
-                {item.action}
-              </p>
+              <p className="text-xs text-muted-foreground font-mono mt-0.5 truncate">{item.action}</p>
             </div>
           </motion.div>
         ))}

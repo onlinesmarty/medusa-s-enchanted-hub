@@ -1,37 +1,30 @@
 import { motion } from "framer-motion";
-
-interface Agent {
-  name: string;
-  emoji: string;
-  role: string;
-  status: "active" | "idle" | "processing";
-  taskCompletion: number;
-  currentTask: string;
-  glowColor: string;
-}
-
-const agents: Agent[] = [
-  { name: "Basilisk", emoji: "🐉", role: "Recolector de Datos", status: "active", taskCompletion: 78, currentTask: "Scrapeando feeds del mercado", glowColor: "var(--glow-emerald)" },
-  { name: "Ouroboros", emoji: "🔄", role: "Orquestador de Pipelines", status: "processing", taskCompletion: 45, currentTask: "Reconstruyendo pipeline de datos", glowColor: "var(--glow-amethyst)" },
-  { name: "Naga", emoji: "🌊", role: "Guardián de APIs", status: "active", taskCompletion: 92, currentTask: "Monitoreando salud de endpoints", glowColor: "var(--glow-cyan)" },
-  { name: "Jörmungandr", emoji: "🌍", role: "Serpiente de Despliegue", status: "active", taskCompletion: 100, currentTask: "Todos los contenedores desplegados", glowColor: "var(--glow-gold)" },
-  { name: "Hydra", emoji: "🔥", role: "Multi-Tarea", status: "processing", taskCompletion: 63, currentTask: "Procesando 4 trabajos en paralelo", glowColor: "var(--glow-emerald)" },
-  { name: "Quetzalcoatl", emoji: "🌈", role: "Alquimista de Ingresos", status: "active", taskCompletion: 87, currentTask: "Optimizando embudos de conversión", glowColor: "var(--glow-gold)" },
-];
-
-const statusColors: Record<string, string> = {
-  active: "bg-glow-emerald",
-  idle: "bg-muted-foreground",
-  processing: "bg-glow-amethyst",
-};
+import { AGENTS } from "@/types/tasks";
 
 const statusLabels: Record<string, string> = {
-  active: "Activo",
-  idle: "Inactivo",
+  active: "Activa",
+  idle: "Inactiva",
   processing: "Procesando",
 };
 
-const AgentCard = ({ agent, index }: { agent: Agent; index: number }) => {
+const agentStatuses: Record<string, { status: "active" | "idle" | "processing"; taskCompletion: number; currentTask: string }> = {
+  "medusa": { status: "active", taskCompletion: 88, currentTask: "Coordinando deploy nocturno" },
+  "content-creator": { status: "processing", taskCompletion: 45, currentTask: "Creando landing page Q2" },
+  "dev-guardian": { status: "active", taskCompletion: 65, currentTask: "Migrando API a v3" },
+  "pm-estrategico": { status: "active", taskCompletion: 100, currentTask: "Sprint planning completado" },
+  "search-master": { status: "processing", taskCompletion: 80, currentTask: "Research competencia" },
+  "siren": { status: "active", taskCompletion: 40, currentTask: "Configurando alertas Slack" },
+};
+
+const statusColors: Record<string, string> = {
+  active: "bg-primary",
+  idle: "bg-muted-foreground",
+  processing: "bg-secondary",
+};
+
+const AgentCard = ({ agent, index }: { agent: typeof AGENTS[0]; index: number }) => {
+  const info = agentStatuses[agent.id] || { status: "idle", taskCompletion: 0, currentTask: "Sin tareas" };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -43,7 +36,7 @@ const AgentCard = ({ agent, index }: { agent: Agent; index: number }) => {
       <motion.div
         className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl"
         style={{
-          background: `radial-gradient(circle at 50% 50%, hsl(${agent.glowColor} / 0.08), transparent 70%)`,
+          background: `radial-gradient(circle at 50% 50%, ${agent.color.replace(")", " / 0.08)")}, transparent 70%)`,
         }}
       />
 
@@ -64,39 +57,43 @@ const AgentCard = ({ agent, index }: { agent: Agent; index: number }) => {
           </div>
           <div className="flex items-center gap-1.5">
             <motion.div
-              className={`w-2 h-2 rounded-full ${statusColors[agent.status]}`}
+              className={`w-2 h-2 rounded-full ${statusColors[info.status]}`}
               animate={
-                agent.status === "processing"
+                info.status === "processing"
                   ? { opacity: [1, 0.3, 1] }
-                  : agent.status === "active"
+                  : info.status === "active"
                   ? { scale: [1, 1.2, 1] }
                   : {}
               }
               transition={{ duration: 1.5, repeat: Infinity }}
             />
-            <span className="text-[10px] font-mono text-muted-foreground uppercase">{statusLabels[agent.status]}</span>
+            <span className="text-[10px] font-mono text-muted-foreground uppercase">{statusLabels[info.status]}</span>
           </div>
         </div>
 
         <div className="mb-3">
           <div className="flex justify-between items-center mb-1.5">
             <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider">Progreso</span>
-            <span className="text-xs font-mono text-foreground font-semibold">{agent.taskCompletion}%</span>
+            <span className="text-xs font-mono text-foreground font-semibold">{info.taskCompletion}%</span>
           </div>
           <div className="h-1.5 bg-muted rounded-full overflow-hidden">
             <motion.div
-              className="h-full rounded-full"
-              style={{
-                background: `linear-gradient(90deg, hsl(${agent.glowColor}), hsl(${agent.glowColor} / 0.6))`,
-              }}
+              className="h-full rounded-full snake-gradient"
               initial={{ width: 0 }}
-              animate={{ width: `${agent.taskCompletion}%` }}
+              animate={{ width: `${info.taskCompletion}%` }}
               transition={{ delay: index * 0.1 + 0.5, duration: 1, ease: "easeOut" }}
             />
           </div>
         </div>
 
-        <p className="text-xs text-muted-foreground font-mono truncate">⚡ {agent.currentTask}</p>
+        <div className="flex items-center justify-between">
+          <p className="text-xs text-muted-foreground font-mono truncate flex-1">⚡ {info.currentTask}</p>
+          <span className="text-[9px] font-mono text-accent ml-2">{agent.model}</span>
+        </div>
+
+        <div className="mt-2 text-[10px] font-mono text-muted-foreground">
+          💰 ${agent.apiCostPerDay.toFixed(2)}/día
+        </div>
       </div>
     </motion.div>
   );
@@ -105,8 +102,8 @@ const AgentCard = ({ agent, index }: { agent: Agent; index: number }) => {
 const AgentGrid = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      {agents.map((agent, i) => (
-        <AgentCard key={agent.name} agent={agent} index={i} />
+      {AGENTS.map((agent, i) => (
+        <AgentCard key={agent.id} agent={agent} index={i} />
       ))}
     </div>
   );

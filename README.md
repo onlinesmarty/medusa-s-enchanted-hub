@@ -25,6 +25,9 @@ Conectado con [OpenClaw](https://github.com/openclaw), los agentes crean tareas,
 
 ## Capturas de pantalla
 
+### Oficina Mágica — Agentes en su mundo virtual
+![Animated Office](screenshots/animated-office.svg)
+
 ### Dashboard — Flota de agentes en tiempo real
 ![Dashboard](screenshots/dashboard.svg)
 

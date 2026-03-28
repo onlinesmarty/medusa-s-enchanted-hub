@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import BudgetGuard from "@/components/BudgetGuard";
 
 const MedusaHeader = () => {
   return (
@@ -47,11 +48,14 @@ const MedusaHeader = () => {
           <span className="text-xs font-mono text-foreground/70">Sistemas Encantados</span>
         </div>
 
-        <div className="hidden lg:flex items-center gap-2 glass-card px-4 py-2">
-          <span className="text-xs font-mono text-muted-foreground">LobeHub</span>
-          <span className="text-glow-emerald text-xs">●</span>
-          <span className="text-xs font-mono text-muted-foreground">ClaudeCode</span>
-          <span className="text-glow-gold text-xs">●</span>
+        <div className="hidden lg:flex items-center gap-4">
+          <BudgetGuard />
+          <div className="flex items-center gap-2 glass-card px-4 py-2">
+            <span className="text-xs font-mono text-muted-foreground">DeepSeek</span>
+            <span className="text-glow-emerald text-xs">●</span>
+            <span className="text-xs font-mono text-muted-foreground">Alibaba</span>
+            <span className="text-glow-gold text-xs">●</span>
+          </div>
         </div>
       </div>
     </motion.header>

@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Task, TaskStatus, STATUS_LABELS, STATUS_COLORS, PRIORITY_COLORS, PRIORITY_LABELS, AGENTS } from "@/types/tasks";
-import { mockTasks } from "@/data/mockTasks";
+import { fetchTasks, updateTask, deleteTask } from "@/lib/api";
 import TaskDialog from "@/components/TaskDialog";
 import TaskTimeline from "@/components/TaskTimeline";
 import { Plus, LayoutGrid, GanttChart, Calendar, Filter } from "lucide-react";
@@ -115,35 +115,64 @@ const KanbanColumn = ({
 };
 
 const TaskBoard = () => {
-  const [tasks, setTasks] = useState<Task[]>(mockTasks);
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [loading, setLoading] = useState(true);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [filterAgent, setFilterAgent] = useState<string | null>(null);
 
+  const loadTasks = useCallback(async () => {
+    try {
+      const data = await fetchTasks();
+      setTasks(data);
+    } catch (err) {
+      console.error("Error fetching tasks:", err);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    loadTasks();
+    const interval = setInterval(loadTasks, 15000);
+    return () => clearInterval(interval);
+  }, [loadTasks]);
+
   const filteredTasks = filterAgent ? tasks.filter(t => t.assignee === filterAgent) : tasks;
 
-  const handleSaveTask = (task: Task) => {
-    setTasks(prev => {
-      const exists = prev.find(t => t.id === task.id);
-      if (exists) return prev.map(t => t.id === task.id ? task : t);
-      return [...prev, task];
-    });
+  const handleSaveTask = async (task: Task) => {
+    await loadTasks();
     setIsDialogOpen(false);
     setEditingTask(null);
   };
 
-  const handleDeleteTask = (taskId: string) => {
-    setTasks(prev => prev.filter(t => t.id !== taskId));
+  const handleDeleteTask = async (taskId: string) => {
+    try {
+      await deleteTask(taskId);
+      await loadTasks();
+    } catch (err) {
+      console.error("Error deleting task:", err);
+    }
     setIsDialogOpen(false);
     setEditingTask(null);
   };
 
-  const handleMoveTask = (taskId: string, newStatus: TaskStatus) => {
+  const handleMoveTask = async (taskId: string, newStatus: TaskStatus) => {
+    // Optimistic update
     setTasks(prev => prev.map(t =>
       t.id === taskId
         ? { ...t, status: newStatus, progress: newStatus === "done" ? 100 : t.progress }
         : t
     ));
+    try {
+      await updateTask(taskId, {
+        status: newStatus,
+        ...(newStatus === "done" ? { progress: 100 } : {}),
+      });
+    } catch (err) {
+      console.error("Error moving task:", err);
+      await loadTasks(); // revert on error
+    }
   };
 
   const openNewTask = () => {
@@ -168,6 +197,9 @@ const TaskBoard = () => {
           <h2 className="font-display text-sm font-semibold text-foreground tracking-wider uppercase">
             Gestión de Tareas
           </h2>
+          {loading && (
+            <span className="text-[10px] font-mono text-muted-foreground animate-pulse">cargando...</span>
+          )}
         </div>
         <div className="flex items-center gap-2">
           {/* Agent filter */}

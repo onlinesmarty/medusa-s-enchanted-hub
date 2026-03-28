@@ -8,6 +8,7 @@ import ActivityFeed from "@/components/ActivityFeed";
 import AnimatedOffice from "@/components/AnimatedOffice";
 import TaskBoard from "@/components/TaskBoard";
 import ApiCosts from "@/components/ApiCosts";
+
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Building2, ClipboardList, DollarSign, LayoutDashboard } from "lucide-react";
@@ -101,7 +102,7 @@ const Index = () => {
             className="text-center py-6"
           >
             <p className="text-[10px] font-mono text-muted-foreground/50 tracking-widest uppercase">
-              🐍 Medusa v1.0 · OpenClaw Centro de Control · Powered by LobeHub + ClaudeCode
+              🐍 Medusa v1.0 · OpenClaw Centro de Control · Powered by DeepSeek + Alibaba
             </p>
           </motion.footer>
         </main>

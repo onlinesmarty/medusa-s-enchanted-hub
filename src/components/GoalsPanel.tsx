@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
 
 const goals = [
-  { name: "Objetivo Ingresos Q1", progress: 87, target: "$100K", emoji: "💰" },
-  { name: "Expansión de Flota", progress: 60, target: "12 agentes", emoji: "🐍" },
-  { name: "Disponibilidad API", progress: 99, target: "99,9%", emoji: "⚡" },
-  { name: "Onboarding Clientes", progress: 45, target: "500 usuarios", emoji: "🌟" },
+  { name: "Ventas Q2 Orniture", progress: 28, target: "€150K", emoji: "🛋️" },
+  { name: "Artículos Blog SEO/GEO", progress: 20, target: "50 posts", emoji: "✍️" },
+  { name: "Productos con GEO", progress: 10, target: "2.000 fichas", emoji: "🔍" },
+  { name: "Seguidores TikTok", progress: 45, target: "10K seguidores", emoji: "🎬" },
 ];
 
 const GoalsPanel = () => {

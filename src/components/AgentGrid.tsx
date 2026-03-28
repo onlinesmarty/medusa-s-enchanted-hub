@@ -1,29 +1,47 @@
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { AGENTS } from "@/types/tasks";
 
-const statusLabels: Record<string, string> = {
-  active: "Activa",
-  idle: "Inactiva",
-  processing: "Procesando",
-};
-
-const agentStatuses: Record<string, { status: "active" | "idle" | "processing"; taskCompletion: number; currentTask: string }> = {
-  "medusa": { status: "active", taskCompletion: 88, currentTask: "Coordinando deploy nocturno" },
-  "content-creator": { status: "processing", taskCompletion: 45, currentTask: "Creando landing page Q2" },
-  "dev-guardian": { status: "active", taskCompletion: 65, currentTask: "Migrando API a v3" },
-  "pm-estrategico": { status: "active", taskCompletion: 100, currentTask: "Sprint planning completado" },
-  "search-master": { status: "processing", taskCompletion: 80, currentTask: "Research competencia" },
-  "siren": { status: "active", taskCompletion: 40, currentTask: "Configurando alertas Slack" },
-};
-
 const statusColors: Record<string, string> = {
-  active: "bg-primary",
-  idle: "bg-muted-foreground",
+  active:     "bg-primary",
+  idle:       "bg-muted-foreground",
   processing: "bg-secondary",
 };
+const statusLabels: Record<string, string> = {
+  active:     "Activa",
+  idle:       "Sin tareas",
+  processing: "En progreso",
+};
 
-const AgentCard = ({ agent, index }: { agent: typeof AGENTS[0]; index: number }) => {
-  const info = agentStatuses[agent.id] || { status: "idle", taskCompletion: 0, currentTask: "Sin tareas" };
+function agentStatus(tasks: any[]): "active" | "idle" | "processing" {
+  if (tasks.some(t => t.status === "in_progress")) return "active";
+  if (tasks.some(t => t.status === "todo" || t.status === "review")) return "processing";
+  return "idle";
+}
+
+function agentProgress(tasks: any[]): number {
+  if (tasks.length === 0) return 0;
+  const done = tasks.filter(t => t.status === "done").length;
+  return Math.round((done / tasks.length) * 100);
+}
+
+function currentTaskLabel(tasks: any[]): string {
+  const active = tasks.find(t => t.status === "in_progress")
+    ?? tasks.find(t => t.status === "review")
+    ?? tasks.find(t => t.status === "todo");
+  return active ? active.title : "Sin tareas asignadas";
+}
+
+const AgentCard = ({
+  agent, index, tasks, costUsd
+}: {
+  agent: typeof AGENTS[0]; index: number; tasks: any[]; costUsd: number;
+}) => {
+  const status   = agentStatus(tasks);
+  const progress = agentProgress(tasks);
+  const task     = currentTaskLabel(tasks);
+  const totalTasks = tasks.length;
+  const doneTasks  = tasks.filter(t => t.status === "done").length;
 
   return (
     <motion.div
@@ -35,9 +53,7 @@ const AgentCard = ({ agent, index }: { agent: typeof AGENTS[0]; index: number })
     >
       <motion.div
         className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl"
-        style={{
-          background: `radial-gradient(circle at 50% 50%, ${agent.color.replace(")", " / 0.08)")}, transparent 70%)`,
-        }}
+        style={{ background: `radial-gradient(circle at 50% 50%, ${agent.color.replace(")", " / 0.08)")}, transparent 70%)` }}
       />
 
       <div className="relative z-10">
@@ -57,42 +73,51 @@ const AgentCard = ({ agent, index }: { agent: typeof AGENTS[0]; index: number })
           </div>
           <div className="flex items-center gap-1.5">
             <motion.div
-              className={`w-2 h-2 rounded-full ${statusColors[info.status]}`}
+              className={`w-2 h-2 rounded-full ${statusColors[status]}`}
               animate={
-                info.status === "processing"
+                status === "active"
+                  ? { scale: [1, 1.3, 1] }
+                  : status === "processing"
                   ? { opacity: [1, 0.3, 1] }
-                  : info.status === "active"
-                  ? { scale: [1, 1.2, 1] }
                   : {}
               }
               transition={{ duration: 1.5, repeat: Infinity }}
             />
-            <span className="text-[10px] font-mono text-muted-foreground uppercase">{statusLabels[info.status]}</span>
+            <span className="text-[10px] font-mono text-muted-foreground uppercase">{statusLabels[status]}</span>
           </div>
         </div>
 
+        {/* Progreso real */}
         <div className="mb-3">
           <div className="flex justify-between items-center mb-1.5">
-            <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider">Progreso</span>
-            <span className="text-xs font-mono text-foreground font-semibold">{info.taskCompletion}%</span>
+            <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider">
+              Tareas {doneTasks}/{totalTasks}
+            </span>
+            <span className="text-xs font-mono text-foreground font-semibold">
+              {totalTasks === 0 ? "—" : `${progress}%`}
+            </span>
           </div>
           <div className="h-1.5 bg-muted rounded-full overflow-hidden">
             <motion.div
               className="h-full rounded-full snake-gradient"
               initial={{ width: 0 }}
-              animate={{ width: `${info.taskCompletion}%` }}
+              animate={{ width: totalTasks === 0 ? "0%" : `${progress}%` }}
               transition={{ delay: index * 0.1 + 0.5, duration: 1, ease: "easeOut" }}
             />
           </div>
         </div>
 
         <div className="flex items-center justify-between">
-          <p className="text-xs text-muted-foreground font-mono truncate flex-1">⚡ {info.currentTask}</p>
+          <p className="text-xs text-muted-foreground font-mono truncate flex-1">
+            {totalTasks === 0 ? "Sin tareas asignadas" : `⚡ ${task}`}
+          </p>
           <span className="text-[9px] font-mono text-accent ml-2">{agent.model}</span>
         </div>
 
         <div className="mt-2 text-[10px] font-mono text-muted-foreground">
-          💰 ${agent.apiCostPerDay.toFixed(2)}/día
+          {costUsd > 0
+            ? `💰 $${costUsd.toFixed(4)} este mes`
+            : "💰 Sin uso registrado aún"}
         </div>
       </div>
     </motion.div>
@@ -100,10 +125,47 @@ const AgentCard = ({ agent, index }: { agent: typeof AGENTS[0]; index: number })
 };
 
 const AgentGrid = () => {
+  const [tasksByAgent, setTasksByAgent] = useState<Record<string, any[]>>({});
+  const [costByAgent, setCostByAgent]   = useState<Record<string, number>>({});
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const [tasks, usage] = await Promise.all([
+          fetch("/api/tasks").then(r => r.json()),
+          fetch("/usage/summary").then(r => r.json()).catch(() => ({ by_agent: [] })),
+        ]);
+
+        const grouped: Record<string, any[]> = {};
+        for (const t of tasks) {
+          if (!grouped[t.assignee]) grouped[t.assignee] = [];
+          grouped[t.assignee].push(t);
+        }
+        setTasksByAgent(grouped);
+
+        const costs: Record<string, number> = {};
+        for (const a of (usage.by_agent ?? [])) {
+          costs[a.agent] = a.cost_usd;
+        }
+        setCostByAgent(costs);
+      } catch {}
+    };
+
+    load();
+    const iv = setInterval(load, 15000);
+    return () => clearInterval(iv);
+  }, []);
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {AGENTS.map((agent, i) => (
-        <AgentCard key={agent.id} agent={agent} index={i} />
+        <AgentCard
+          key={agent.id}
+          agent={agent}
+          index={i}
+          tasks={tasksByAgent[agent.id] ?? []}
+          costUsd={costByAgent[agent.id] ?? 0}
+        />
       ))}
     </div>
   );

@@ -1,6 +1,11 @@
 export type TaskStatus = "backlog" | "todo" | "in_progress" | "review" | "done";
 export type TaskPriority = "low" | "medium" | "high" | "urgent";
 
+export interface TaskLink {
+  url: string;
+  title: string;
+}
+
 export interface Task {
   id: string;
   title: string;
@@ -9,8 +14,11 @@ export interface Task {
   priority: TaskPriority;
   assignee: string; // agent id
   dueDate: string | null;
+  startDate: string | null;
   dependencies: string[]; // task ids
   tags: string[];
+  links: TaskLink[];
+  images: string[];
   progress: number; // 0-100
   apiCost: number; // USD
   createdAt: string;
@@ -40,7 +48,7 @@ export const AGENTS: Agent[] = [
     outfitColor: "hsl(155 50% 30%)",
     emoji: "🐍",
     apiCostPerDay: 4.20,
-    model: "Claude Opus",
+    model: "DeepSeek Chat",
   },
   {
     id: "content-creator",
@@ -52,7 +60,7 @@ export const AGENTS: Agent[] = [
     outfitColor: "hsl(330 60% 45%)",
     emoji: "✨",
     apiCostPerDay: 2.80,
-    model: "GPT-4o",
+    model: "DeepSeek Chat",
   },
   {
     id: "dev-guardian",
@@ -64,7 +72,7 @@ export const AGENTS: Agent[] = [
     outfitColor: "hsl(200 60% 35%)",
     emoji: "🛡️",
     apiCostPerDay: 5.10,
-    model: "Claude Sonnet",
+    model: "DeepSeek Chat",
   },
   {
     id: "pm-estrategico",
@@ -76,31 +84,31 @@ export const AGENTS: Agent[] = [
     outfitColor: "hsl(45 70% 40%)",
     emoji: "📋",
     apiCostPerDay: 1.90,
-    model: "GPT-4o-mini",
+    model: "DeepSeek Chat",
   },
   {
     id: "search-master",
     name: "Search Master",
-    role: "Maestra de Búsqueda",
+    role: "SEO & GEO Specialist",
     color: "hsl(270 55% 55%)",
     hairColor: "hsl(270 40% 25%)",
     skinTone: "hsl(32 58% 79%)",
     outfitColor: "hsl(270 45% 40%)",
     emoji: "🔍",
     apiCostPerDay: 3.40,
-    model: "Perplexity Pro",
+    model: "DeepSeek Chat",
   },
   {
     id: "siren",
     name: "Siren",
-    role: "Comunicaciones & Alertas",
+    role: "Viral Video & Contenido Visual",
     color: "hsl(185 70% 50%)",
     hairColor: "hsl(185 50% 30%)",
     skinTone: "hsl(27 52% 81%)",
     outfitColor: "hsl(185 60% 35%)",
     emoji: "🧜‍♀️",
     apiCostPerDay: 2.10,
-    model: "Gemini Flash",
+    model: "Alibaba Qwen VL",
   },
 ];
 

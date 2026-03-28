@@ -1,119 +1,139 @@
-# 🐍 Medusa's Enchanted Hub — Mission Control
+<div align="center">
 
-> A self-hosted AI agent mission control panel for managing autonomous AI agents, tracking tasks, monitoring API costs, and controlling multi-agent operations — all from a beautiful dark-themed web UI.
+# 🐍 Medusa's Enchanted Hub
 
-![Hub Screenshot](https://hub.onlinesmarty.solutions/og-preview.png)
+### Centro de control para flotas de agentes de IA autónomos
 
----
+**Panel de mando self-hosted · Gestión de tareas · Control de costos API · Monitorización de agentes**
 
-## What Is This?
+[![React](https://img.shields.io/badge/React-18-61dafb?style=flat-square&logo=react)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?style=flat-square&logo=typescript)](https://typescriptlang.org)
+[![FastAPI](https://img.shields.io/badge/FastAPI-Python-009688?style=flat-square&logo=fastapi)](https://fastapi.tiangolo.com)
+[![OpenClaw](https://img.shields.io/badge/OpenClaw-compatible-2ecc71?style=flat-square)](https://github.com/openclaw)
 
-This is the front-end dashboard for an [OpenClaw](https://github.com/openclaw) multi-agent system. It gives you a real-time command center to:
-
-- See all your AI agents and their current status at a glance
-- Create, assign, and track tasks across agents
-- Monitor API spending (tokens, cost per agent, cost per provider)
-- Track image generation credits (fal.ai, SiliconFlow)
-- Watch a live activity feed of what agents are doing
-- Set revenue goals and track progress
-
-It's designed to run on a **VPS behind Nginx**, accessible from any device including mobile — no PC required.
+</div>
 
 ---
 
-## Features
+## ¿Qué es esto?
 
-### Dashboard
-- **Agent Fleet** — Cards for each agent (Medusa, Content Creator, Dev Guardian, PM Estratégico, Search Master, Siren) with live status indicators, task progress bars, and current task labels
-- **Stats Bar** — Quick overview of total tasks, completion rate, active agents, and pending items
-- **Revenue Cauldron** — Goal tracker with progress visualization
-- **Goals Panel** — Set and track business objectives
-- **Activity Feed** — Rolling log of recent agent actions
-- **Animated Office** — Ambient visual with floating particles
+Un **panel de mando completo para gestionar agentes de IA autónomos** desde cualquier dispositivo, sin necesidad de tener el ordenador encendido. Diseñado para correr en un VPS detrás de Nginx, accesible desde móvil, tablet o escritorio.
 
-### Task Board (Kanban)
-- Columns: `Todo → In Progress → Review → Done`
-- Full task cards with: priority badge, assignee, due date, progress %, tags, links, images
-- Create/edit tasks via modal dialog
-- Filter by assignee or status
-- Timeline view option
-- Tasks persist in a SQLite database via the task API
-
-### API Costs
-- Spending breakdown: Today / This Week / This Month / Total
-- Cost by provider (DeepSeek, Alibaba/Qwen)
-- Cost by agent (last 30 days) with per-agent bar charts
-- Daily cost chart (last 7 days, recharts)
-- Live call log — model, tokens, cost per call, timestamps
-- **Image credits widget** — balance and approximate images remaining per provider
+Conectado con [OpenClaw](https://github.com/openclaw), los agentes crean tareas, actualizan su progreso y registran cada llamada API automáticamente en tiempo real.
 
 ---
 
-## Tech Stack
+## Capturas de pantalla
 
-| Layer | Technology |
-|-------|------------|
+### Dashboard — Flota de agentes en tiempo real
+![Dashboard](screenshots/dashboard.svg)
+
+### Tablero de tareas — Kanban con 4 columnas
+![Tasks](screenshots/tasks.svg)
+
+### Costos API — Control total del gasto
+![API Costs](screenshots/api-costs.svg)
+
+---
+
+## Características
+
+### 🏠 Dashboard
+- **Flota de agentes** — Tarjetas con estado en vivo, barra de progreso, tarea actual y coste acumulado de cada agente (Medusa, Content Creator, Dev Guardian, PM Estratégico, Search Master, Siren)
+- **Stats Bar** — Resumen: tareas totales, % completado, agentes activos, pendientes
+- **Revenue Cauldron** — Seguimiento de ingresos vs objetivo mensual
+- **Goals Panel** — Objetivos de negocio con barra de progreso
+- **Activity Feed** — Log en vivo de acciones de los agentes
+- **Oficina virtual** — Visualización ambiental animada
+
+### 📋 Tablero de Tareas (Kanban)
+- Columnas: `Todo → En Progreso → Revisión → Completado`
+- Tarjetas completas: prioridad, agente asignado, fecha límite, progreso %, tags, links, imágenes
+- Crear/editar tareas con modal completo
+- Filtrar por agente o estado
+- Vista de timeline
+- Persistencia en SQLite vía task API
+
+### 💸 Costos API
+- Gasto por período: Hoy / Esta Semana / Este Mes / Total
+- Desglose por proveedor (DeepSeek, Alibaba/Qwen) con barras
+- Desglose por agente (últimos 30 días)
+- Gráfica de barras diaria (últimos 7 días)
+- Log de llamadas en tiempo real: modelo, tokens, coste, timestamp
+- **Widget de créditos de imagen** — saldo restante e imágenes aproximadas por proveedor (fal.ai, SiliconFlow)
+
+### 🛡️ Control de presupuesto
+- BudgetGuard en el header: si se supera el límite configurable, los agentes no pueden gastar más
+- Alertas visuales cuando el saldo se acerca al límite
+
+---
+
+## Stack tecnológico
+
+| Capa | Tecnología |
+|------|------------|
 | Framework | React 18 + TypeScript |
 | Build | Vite 5 |
 | UI Components | shadcn/ui + Radix UI |
-| Styling | Tailwind CSS |
-| Animations | Framer Motion |
-| Charts | Recharts |
-| HTTP | TanStack Query (React Query v5) |
+| Estilos | Tailwind CSS |
+| Animaciones | Framer Motion |
+| Gráficas | Recharts |
+| HTTP | TanStack Query v5 |
 | Forms | React Hook Form + Zod |
+| Backend | FastAPI (Python) |
+| Base de datos | SQLite |
+| Servidor web | Nginx |
 
 ---
 
-## Architecture
+## Arquitectura
 
 ```
-Browser (hub.onlinesmarty.solutions)
-    │
-    ▼
-Nginx (reverse proxy + basic auth)
-    ├── /          → React SPA  (dist/)
-    ├── /api/      → Task API   (FastAPI, port 3001)
-    └── /usage/    → Usage API  (port 3002, token/cost tracking)
+Navegador  (hub.tudominio.com)
+     │
+     ▼
+  Nginx  (reverse proxy + autenticación básica)
+     ├── /           →  React SPA  (dist/)
+     ├── /api/       →  Task API   (FastAPI, puerto 3001)
+     └── /usage/     →  Usage API  (puerto 3002, tracking de tokens)
 ```
 
-### Backend: Task API (`/api/`)
+### Task API (`/api/`)
 
-FastAPI app at `port 3001`. Endpoints used by the Hub:
+FastAPI en `puerto 3001`. Endpoints principales:
 
-| Method | Path | Description |
+| Método | Ruta | Descripción |
 |--------|------|-------------|
-| GET | `/tasks` | List all tasks |
-| POST | `/tasks` | Create task |
-| PUT | `/tasks/{id}` | Update task |
-| DELETE | `/tasks/{id}` | Delete task |
-| POST | `/image/generate` | Generate image via fal.ai |
-| GET | `/image-budgets` | Remaining image credits |
-| GET | `/discord/history` | Read Discord channel messages |
-| GET | `/discord/channels` | List available channels |
+| GET | `/tasks` | Listar todas las tareas |
+| POST | `/tasks` | Crear tarea |
+| PUT | `/tasks/{id}` | Actualizar tarea |
+| DELETE | `/tasks/{id}` | Eliminar tarea |
+| POST | `/image/generate` | Generar imagen vía fal.ai |
+| GET | `/image-budgets` | Créditos de imagen restantes |
+| GET | `/discord/history` | Leer mensajes de canal Discord |
+| GET | `/discord/channels` | Listar canales disponibles |
 
-Tasks are stored in SQLite (`tasks.db`).
+### Usage API (`/usage/`)
 
-### Backend: Usage API (`/usage/`)
+Servicio separado en `puerto 3002` que registra cada llamada LLM de OpenClaw:
 
-Separate service at `port 3002` that logs every OpenClaw LLM call:
-
-| Method | Path | Description |
+| Método | Ruta | Descripción |
 |--------|------|-------------|
-| GET | `/usage/summary` | Aggregated spend by period, agent, provider |
-| GET | `/usage/recent` | Last N API calls |
-| GET | `/budget` | Budget limit status |
+| GET | `/usage/summary` | Gasto agregado por período, agente, proveedor |
+| GET | `/usage/recent` | Últimas N llamadas API |
+| GET | `/budget` | Estado del límite de presupuesto |
 
 ---
 
-## Setup
+## Instalación
 
-### Prerequisites
+### Requisitos
 - Node.js 18+
-- VPS with Nginx
-- Python 3.10+ (for task API)
-- OpenClaw (optional — for live agent data)
+- VPS con Nginx
+- Python 3.10+ (para la task API)
+- OpenClaw (opcional — para datos en vivo de agentes)
 
-### 1. Install & Build
+### 1. Clonar e instalar
 
 ```bash
 git clone https://github.com/onlinesmarty/medusa-s-enchanted-hub.git
@@ -122,15 +142,15 @@ npm install
 npm run build
 ```
 
-### 2. Deploy to Nginx
+### 2. Configurar Nginx
 
 ```nginx
 server {
-    server_name hub.yourdomain.com;
+    server_name hub.tudominio.com;
     root /var/www/mission-control-app/dist;
     index index.html;
 
-    # Basic auth (optional but recommended)
+    # Autenticación básica (recomendada)
     location / {
         auth_basic "Mission Control";
         auth_basic_user_file /etc/nginx/.hub_passwd;
@@ -150,22 +170,21 @@ server {
 ```
 
 ```bash
-# Generate basic auth password
-htpasswd -c /etc/nginx/.hub_passwd yourusername
+# Crear contraseña de acceso
+htpasswd -c /etc/nginx/.hub_passwd tuusuario
 
-# Reload nginx
+# Recargar nginx
 nginx -s reload
 ```
 
-### 3. Start Task API
+### 3. Iniciar Task API
 
 ```bash
-cd task-api
-pip install fastapi uvicorn httpx python-dotenv
+pip install fastapi uvicorn httpx
 uvicorn main:app --host 127.0.0.1 --port 3001
 ```
 
-Or as a systemd service:
+Como servicio systemd:
 
 ```ini
 [Unit]
@@ -174,76 +193,74 @@ After=network.target
 
 [Service]
 ExecStart=/usr/bin/uvicorn main:app --host 127.0.0.1 --port 3001
-WorkingDirectory=/root/.openclaw/task-api
+WorkingDirectory=/ruta/a/task-api
 Restart=always
 
 [Install]
 WantedBy=multi-user.target
 ```
 
-### 4. fal.ai Image Generation (optional)
+### 4. Generación de imágenes con fal.ai (opcional)
 
-Create `task-api/fal_api_key.txt` with your fal.ai API key:
+Crea `task-api/fal_api_key.txt` con tu clave de fal.ai:
 
 ```
-your-key-id:your-key-secret
+tu-key-id:tu-key-secret
 ```
 
 ```bash
 chmod 600 task-api/fal_api_key.txt
 ```
 
-Supported models: `nano-banana-2`, `nano-banana-pro`, `flux-pro`, `flux-dev`
+Modelos disponibles: `nano-banana-2` ($0.08/img), `nano-banana-pro` ($0.15), `flux-pro` ($0.04), `flux-dev` ($0.025)
 
-### 5. Discord History (optional)
-
-Set your Discord bot token in the task API environment:
+### 5. Historial de Discord (opcional)
 
 ```bash
-export DISCORD_BOT_TOKEN="your-bot-token"
+export DISCORD_BOT_TOKEN="tu-bot-token"
 ```
 
 ---
 
-## OpenClaw Integration
+## Integración con OpenClaw
 
-This Hub is built to work alongside [OpenClaw](https://github.com/openclaw) — an autonomous AI agent framework. When connected:
+Este hub está diseñado para funcionar con [OpenClaw](https://github.com/openclaw), framework de agentes de IA autónomos. Con la integración activa:
 
-- Agents automatically create and update tasks via the API
-- API costs are logged in real time as agents make LLM calls
-- The activity feed shows agent actions as they happen
-- The budget guard blocks agents when spending limits are hit
+- Los agentes crean y actualizan tareas automáticamente vía API
+- Cada llamada LLM se registra en tiempo real en la sección de costos
+- El Activity Feed muestra acciones de agentes al instante
+- BudgetGuard bloquea a los agentes si se supera el límite configurado
 
-The agents shown in the fleet are defined in `src/types/tasks.ts` and can be customized to match your OpenClaw `AGENTS.md`.
+Los agentes de la flota se definen en `src/types/tasks.ts` y se pueden personalizar para que coincidan con tu `AGENTS.md` de OpenClaw.
 
 ---
 
-## Development
+## Desarrollo local
 
 ```bash
-npm run dev        # Start dev server (port 5173)
-npm run build      # Production build → dist/
-npm run lint       # ESLint check
-npm run test       # Vitest unit tests
+npm run dev        # Servidor de desarrollo (puerto 5173)
+npm run build      # Build de producción → dist/
+npm run lint       # ESLint
+npm run test       # Tests con Vitest
 ```
 
 ---
 
-## Customization
+## Personalización
 
-| What | Where |
-|------|-------|
-| Agent names/emoji/colors | `src/types/tasks.ts` → `AGENTS` array |
-| Nav tabs | `src/pages/Index.tsx` → `navItems` |
-| Provider colors in charts | `src/components/ApiCosts.tsx` → `PROVIDER_COLOR` |
-| Theme colors | `src/index.css` → CSS variables |
-| Budget limits | Usage API config |
+| Qué cambiar | Dónde |
+|-------------|-------|
+| Nombres/emojis/colores de agentes | `src/types/tasks.ts` → array `AGENTS` |
+| Pestañas de navegación | `src/pages/Index.tsx` → `navItems` |
+| Colores por proveedor en gráficas | `src/components/ApiCosts.tsx` → `PROVIDER_COLOR` |
+| Colores del tema | `src/index.css` → variables CSS |
+| Límite de presupuesto | Configuración de Usage API |
 
 ---
 
-## License
+## Licencia
 
-MIT — use it, fork it, build your own agent empire.
+MIT — úsalo, forkéalo, construye tu propio imperio de agentes.
 
 ---
 

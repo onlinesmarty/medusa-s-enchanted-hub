@@ -1,0 +1,173 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg" font-family="monospace">
+  <!-- Background -->
+  <rect width="1200" height="675" fill="#0a0a12"/>
+  <!-- Grid dots -->
+  <pattern id="dots" width="60" height="60" patternUnits="userSpaceOnUse">
+    <circle cx="30" cy="30" r="1" fill="#ffffff" fill-opacity="0.04"/>
+  </pattern>
+  <rect width="1200" height="675" fill="url(#dots)"/>
+
+  <!-- Header -->
+  <rect x="0" y="0" width="1200" height="70" fill="#0d0d1a" fill-opacity="0.8"/>
+  <!-- Medusa orb -->
+  <circle cx="40" cy="35" r="22" fill="none" stroke="#2ecc71" stroke-width="1" stroke-opacity="0.4"/>
+  <circle cx="40" cy="35" r="18" fill="#1a2a1a"/>
+  <text x="40" y="42" text-anchor="middle" font-size="18">🐍</text>
+  <text x="72" y="30" font-size="16" fill="#2ecc71" font-weight="bold" letter-spacing="3">MEDUSA</text>
+  <text x="72" y="46" font-size="9" fill="#4a5568" letter-spacing="2">OPENCLAW CENTRO DE CONTROL</text>
+  <!-- Budget guard -->
+  <rect x="1050" y="15" width="130" height="40" rx="8" fill="#1a1a2e" stroke="#2ecc71" stroke-width="1" stroke-opacity="0.3"/>
+  <text x="1115" y="31" text-anchor="middle" font-size="9" fill="#4a5568">PRESUPUESTO</text>
+  <text x="1115" y="47" text-anchor="middle" font-size="11" fill="#2ecc71">$4.82 restante</text>
+
+  <!-- Nav tabs -->
+  <rect x="24" y="78" width="270" height="36" rx="10" fill="#13131f" fill-opacity="0.6" stroke="#2a2a3e" stroke-width="1"/>
+  <rect x="28" y="82" width="80" height="28" rx="8" fill="#2ecc71" fill-opacity="0.15" stroke="#2ecc71" stroke-width="1" stroke-opacity="0.4"/>
+  <text x="68" y="101" text-anchor="middle" font-size="10" fill="#2ecc71">🏠 Dashboard</text>
+  <text x="158" y="101" text-anchor="middle" font-size="10" fill="#4a5568">📋 Tareas</text>
+  <text x="248" y="101" text-anchor="middle" font-size="10" fill="#4a5568">💸 Costos API</text>
+
+  <!-- Animated office bar -->
+  <rect x="24" y="122" width="1152" height="80" rx="12" fill="#11111e" stroke="#1e1e35" stroke-width="1"/>
+  <text x="600" y="158" text-anchor="middle" font-size="11" fill="#2a2a4a" letter-spacing="2">✦ ORNITURE STUDIO — OFICINA VIRTUAL ✦</text>
+  <!-- Desk elements -->
+  <rect x="460" y="162" width="280" height="28" rx="4" fill="#1a1a2e"/>
+  <circle cx="490" cy="176" r="8" fill="#2ecc71" fill-opacity="0.3"/>
+  <circle cx="510" cy="176" r="8" fill="#9b59b6" fill-opacity="0.3"/>
+  <circle cx="530" cy="176" r="8" fill="#3498db" fill-opacity="0.3"/>
+  <rect x="550" y="168" width="80" height="16" rx="3" fill="#2a2a3e"/>
+  <rect x="640" y="168" width="80" height="16" rx="3" fill="#2a2a3e"/>
+
+  <!-- Stats bar -->
+  <rect x="24" y="214" width="270" height="80" rx="12" fill="#11111e" stroke="#1e1e35" stroke-width="1"/>
+  <text x="44" y="236" font-size="9" fill="#4a5568" letter-spacing="1">TAREAS TOTALES</text>
+  <text x="44" y="258" font-size="28" fill="#ffffff" font-weight="bold">24</text>
+  <text x="44" y="278" font-size="9" fill="#4a5568">↑ 3 esta semana</text>
+
+  <rect x="306" y="214" width="270" height="80" rx="12" fill="#11111e" stroke="#1e1e35" stroke-width="1"/>
+  <text x="326" y="236" font-size="9" fill="#4a5568" letter-spacing="1">COMPLETADAS</text>
+  <text x="326" y="258" font-size="28" fill="#2ecc71" font-weight="bold">67%</text>
+  <text x="326" y="278" font-size="9" fill="#4a5568">16 de 24 tareas</text>
+
+  <rect x="588" y="214" width="270" height="80" rx="12" fill="#11111e" stroke="#1e1e35" stroke-width="1"/>
+  <text x="608" y="236" font-size="9" fill="#4a5568" letter-spacing="1">AGENTES ACTIVOS</text>
+  <text x="608" y="258" font-size="28" fill="#9b59b6" font-weight="bold">4</text>
+  <text x="608" y="278" font-size="9" fill="#4a5568">de 6 agentes</text>
+
+  <rect x="870" y="214" width="306" height="80" rx="12" fill="#11111e" stroke="#1e1e35" stroke-width="1"/>
+  <text x="890" y="236" font-size="9" fill="#4a5568" letter-spacing="1">PENDIENTES</text>
+  <text x="890" y="258" font-size="28" fill="#f39c12" font-weight="bold">8</text>
+  <text x="890" y="278" font-size="9" fill="#4a5568">tareas en cola</text>
+
+  <!-- Section label -->
+  <text x="600" y="322" text-anchor="middle" font-size="9" fill="#2a2a4a" letter-spacing="4">— FLOTA DE AGENTES —</text>
+
+  <!-- Agent cards -->
+  <!-- Medusa -->
+  <rect x="24" y="332" width="185" height="130" rx="12" fill="#11111e" stroke="#1e1e35" stroke-width="1"/>
+  <text x="50" y="360" font-size="20">🐍</text>
+  <text x="78" y="354" font-size="11" fill="#ffffff" font-weight="bold">Medusa</text>
+  <text x="78" y="368" font-size="9" fill="#4a5568">Coordinadora</text>
+  <circle cx="190" cy="345" r="5" fill="#2ecc71"/>
+  <text x="44" y="388" font-size="8" fill="#4a5568">Optimizando SEO...</text>
+  <rect x="34" y="395" width="155" height="4" rx="2" fill="#1e1e35"/>
+  <rect x="34" y="395" width="104" height="4" rx="2" fill="#2ecc71" fill-opacity="0.7"/>
+  <text x="34" y="412" font-size="8" fill="#4a5568">3/5 tareas · $0.24</text>
+  <text x="34" y="425" font-size="9" fill="#2ecc71">● Activa</text>
+  <rect x="34" y="433" width="60" height="18" rx="6" fill="#1a2a1a" stroke="#2ecc71" stroke-width="1" stroke-opacity="0.4"/>
+  <text x="64" y="445" text-anchor="middle" font-size="8" fill="#2ecc71">Ver tareas</text>
+
+  <!-- Content Creator -->
+  <rect x="221" y="332" width="185" height="130" rx="12" fill="#11111e" stroke="#1e1e35" stroke-width="1"/>
+  <text x="247" y="360" font-size="20">✨</text>
+  <text x="275" y="354" font-size="11" fill="#ffffff" font-weight="bold">Content Creator</text>
+  <text x="275" y="368" font-size="9" fill="#4a5568">Creadora de Contenido</text>
+  <circle cx="387" cy="345" r="5" fill="#9b59b6"/>
+  <text x="241" y="388" font-size="8" fill="#4a5568">Redactando blog post...</text>
+  <rect x="231" y="395" width="155" height="4" rx="2" fill="#1e1e35"/>
+  <rect x="231" y="395" width="78" height="4" rx="2" fill="#9b59b6" fill-opacity="0.7"/>
+  <text x="231" y="412" font-size="8" fill="#4a5568">2/5 tareas · $0.18</text>
+  <text x="231" y="425" font-size="9" fill="#9b59b6">● En progreso</text>
+
+  <!-- Dev Guardian -->
+  <rect x="418" y="332" width="185" height="130" rx="12" fill="#11111e" stroke="#1e1e35" stroke-width="1"/>
+  <text x="444" y="360" font-size="20">🛡️</text>
+  <text x="472" y="354" font-size="11" fill="#ffffff" font-weight="bold">Dev Guardian</text>
+  <text x="472" y="368" font-size="9" fill="#4a5568">Guardián del Código</text>
+  <circle cx="584" cy="345" r="5" fill="#3498db"/>
+  <text x="438" y="388" font-size="8" fill="#4a5568">Revisando API endpoints</text>
+  <rect x="428" y="395" width="155" height="4" rx="2" fill="#1e1e35"/>
+  <rect x="428" y="395" width="93" height="4" rx="2" fill="#3498db" fill-opacity="0.7"/>
+  <text x="428" y="412" font-size="8" fill="#4a5568">3/4 tareas · $0.09</text>
+  <text x="428" y="425" font-size="9" fill="#3498db">● Activo</text>
+
+  <!-- PM -->
+  <rect x="615" y="332" width="185" height="130" rx="12" fill="#11111e" stroke="#1e1e35" stroke-width="1"/>
+  <text x="641" y="360" font-size="20">📋</text>
+  <text x="669" y="354" font-size="11" fill="#ffffff" font-weight="bold">PM Estratégico</text>
+  <text x="669" y="368" font-size="9" fill="#4a5568">Project Manager</text>
+  <circle cx="781" cy="345" r="5" fill="#f39c12"/>
+  <text x="635" y="388" font-size="8" fill="#4a5568">Planificando sprint Q2</text>
+  <rect x="625" y="395" width="155" height="4" rx="2" fill="#1e1e35"/>
+  <rect x="625" y="395" width="62" height="4" rx="2" fill="#f39c12" fill-opacity="0.7"/>
+  <text x="625" y="412" font-size="8" fill="#4a5568">2/8 tareas · $0.31</text>
+  <text x="625" y="425" font-size="9" fill="#f39c12">● En progreso</text>
+
+  <!-- Search Master -->
+  <rect x="812" y="332" width="185" height="130" rx="12" fill="#11111e" stroke="#1e1e35" stroke-width="1"/>
+  <text x="838" y="360" font-size="20">🔍</text>
+  <text x="866" y="354" font-size="11" fill="#ffffff" font-weight="bold">Search Master</text>
+  <text x="866" y="368" font-size="9" fill="#4a5568">SEO &amp; Búsqueda</text>
+  <circle cx="978" cy="345" r="5" fill="#4a5568"/>
+  <text x="832" y="388" font-size="8" fill="#4a5568">Sin tareas asignadas</text>
+  <rect x="822" y="395" width="155" height="4" rx="2" fill="#1e1e35"/>
+  <text x="822" y="412" font-size="8" fill="#4a5568">0/0 tareas · $0.00</text>
+  <text x="822" y="425" font-size="9" fill="#4a5568">● Sin tareas</text>
+
+  <!-- Siren -->
+  <rect x="1009" y="332" width="167" height="130" rx="12" fill="#11111e" stroke="#1e1e35" stroke-width="1"/>
+  <text x="1031" y="360" font-size="20">🧜‍♀️</text>
+  <text x="1059" y="354" font-size="11" fill="#ffffff" font-weight="bold">Siren</text>
+  <text x="1059" y="368" font-size="9" fill="#4a5568">Social &amp; RRSS</text>
+  <circle cx="1158" cy="345" r="5" fill="#1abc9c"/>
+  <text x="1025" y="388" font-size="8" fill="#4a5568">Programando posts...</text>
+  <rect x="1019" y="395" width="140" height="4" rx="2" fill="#1e1e35"/>
+  <rect x="1019" y="395" width="56" height="4" rx="2" fill="#1abc9c" fill-opacity="0.7"/>
+  <text x="1019" y="412" font-size="8" fill="#4a5568">1/3 tareas · $0.05</text>
+  <text x="1019" y="425" font-size="9" fill="#1abc9c">● Activa</text>
+
+  <!-- Bottom panels -->
+  <rect x="24" y="474" width="380" height="180" rx="12" fill="#11111e" stroke="#1e1e35" stroke-width="1"/>
+  <text x="44" y="496" font-size="9" fill="#4a5568" letter-spacing="1">REVENUE CAULDRON</text>
+  <text x="44" y="520" font-size="22" fill="#f39c12" font-weight="bold">€2,340</text>
+  <text x="44" y="538" font-size="9" fill="#4a5568">de €5,000 objetivo mensual</text>
+  <rect x="34" y="548" width="360" height="8" rx="4" fill="#1e1e35"/>
+  <rect x="34" y="548" width="168" height="8" rx="4" fill="#f39c12" fill-opacity="0.7"/>
+  <text x="44" y="572" font-size="9" fill="#4a5568">47% completado</text>
+
+  <rect x="416" y="474" width="380" height="180" rx="12" fill="#11111e" stroke="#1e1e35" stroke-width="1"/>
+  <text x="436" y="496" font-size="9" fill="#4a5568" letter-spacing="1">OBJETIVOS</text>
+  <text x="436" y="518" font-size="10" fill="#ffffff">● Lanzar tienda Shopify</text>
+  <rect x="436" y="524" width="340" height="3" rx="2" fill="#1e1e35"/>
+  <rect x="436" y="524" width="272" height="3" rx="2" fill="#2ecc71" fill-opacity="0.6"/>
+  <text x="436" y="542" font-size="10" fill="#ffffff">● Campaña email Klaviyo</text>
+  <rect x="436" y="548" width="340" height="3" rx="2" fill="#1e1e35"/>
+  <rect x="436" y="548" width="136" height="3" rx="2" fill="#9b59b6" fill-opacity="0.6"/>
+  <text x="436" y="566" font-size="10" fill="#ffffff">● Blog SEO 10 posts</text>
+  <rect x="436" y="572" width="340" height="3" rx="2" fill="#1e1e35"/>
+  <rect x="436" y="572" width="68" height="3" rx="2" fill="#3498db" fill-opacity="0.6"/>
+
+  <rect x="808" y="474" width="368" height="180" rx="12" fill="#11111e" stroke="#1e1e35" stroke-width="1"/>
+  <text x="828" y="496" font-size="9" fill="#4a5568" letter-spacing="1">ACTIVIDAD RECIENTE</text>
+  <text x="828" y="516" font-size="9" fill="#2ecc71">🐍 Medusa → Tarea completada</text>
+  <text x="828" y="532" font-size="9" fill="#4a5568">hace 2 min</text>
+  <text x="828" y="550" font-size="9" fill="#9b59b6">✨ Content → Post publicado</text>
+  <text x="828" y="566" font-size="9" fill="#4a5568">hace 8 min</text>
+  <text x="828" y="584" font-size="9" fill="#3498db">🛡️ Guardian → PR revisado</text>
+  <text x="828" y="600" font-size="9" fill="#4a5568">hace 15 min</text>
+  <text x="828" y="618" font-size="9" fill="#1abc9c">🧜‍♀️ Siren → Story programada</text>
+  <text x="828" y="634" font-size="9" fill="#4a5568">hace 31 min</text>
+
+  <!-- Footer -->
+  <text x="600" y="660" text-anchor="middle" font-size="9" fill="#1e1e35" letter-spacing="3">🐍 MEDUSA V1.0 · OPENCLAW · DEEPSEEK + ALIBABA</text>
+</svg>

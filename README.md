@@ -247,4 +247,4 @@ MIT — use it, fork it, build your own agent empire.
 
 ---
 
-*Built with [Lovable](https://lovable.dev) · Powered by OpenClaw + DeepSeek + Alibaba Qwen*
+*Powered by [OpenClaw](https://github.com/openclaw) · DeepSeek · Alibaba Qwen · fal.ai*

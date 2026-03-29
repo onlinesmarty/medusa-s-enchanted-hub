@@ -8,17 +8,19 @@ import ActivityFeed from "@/components/ActivityFeed";
 import AnimatedOffice from "@/components/AnimatedOffice";
 import TaskBoard from "@/components/TaskBoard";
 import ApiCosts from "@/components/ApiCosts";
+import ContentGuides from "@/components/ContentGuides";
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Building2, ClipboardList, DollarSign, LayoutDashboard } from "lucide-react";
+import { BookOpen, ClipboardList, DollarSign, LayoutDashboard } from "lucide-react";
 
-type View = "dashboard" | "tareas" | "costos";
+type View = "dashboard" | "tareas" | "costos" | "guias";
 
-const navItems: { id: View; label: string; icon: React.ReactNode; emoji: string }[] = [
-  { id: "dashboard", label: "Dashboard", icon: <LayoutDashboard className="w-3.5 h-3.5" />, emoji: "🏠" },
-  { id: "tareas", label: "Tareas", icon: <ClipboardList className="w-3.5 h-3.5" />, emoji: "📋" },
-  { id: "costos", label: "Costos API", icon: <DollarSign className="w-3.5 h-3.5" />, emoji: "💸" },
+const navItems: { id: View; label: string; icon: React.ReactNode }[] = [
+  { id: "dashboard", label: "Dashboard", icon: <LayoutDashboard className="w-3.5 h-3.5" /> },
+  { id: "tareas", label: "Tareas", icon: <ClipboardList className="w-3.5 h-3.5" /> },
+  { id: "costos", label: "Costos API", icon: <DollarSign className="w-3.5 h-3.5" /> },
+  { id: "guias", label: "Guías de Contenido", icon: <BookOpen className="w-3.5 h-3.5" /> },
 ];
 
 const Index = () => {
@@ -61,13 +63,11 @@ const Index = () => {
         </div>
 
         <main className="px-4 md:px-6 pb-10 max-w-[1400px] mx-auto space-y-6">
-          {/* Always show the animated office */}
-          <AnimatedOffice />
+          {view !== "guias" && <AnimatedOffice />}
 
           {view === "dashboard" && (
             <>
               <StatsBar />
-
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -80,9 +80,7 @@ const Index = () => {
                 </h2>
                 <div className="h-px flex-1 bg-border/50" />
               </motion.div>
-
               <AgentGrid />
-
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                 <RevenueCauldron />
                 <GoalsPanel />
@@ -92,8 +90,8 @@ const Index = () => {
           )}
 
           {view === "tareas" && <TaskBoard />}
-
           {view === "costos" && <ApiCosts />}
+          {view === "guias" && <ContentGuides />}
 
           <motion.footer
             initial={{ opacity: 0 }}
